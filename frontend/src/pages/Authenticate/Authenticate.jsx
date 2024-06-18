@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import StepPhoneEmail from '../Steps/StepPhoneEmail/StepPhoneEmail';
-import StepOtp from '../StepOtp/StepOtp';
+import StepOtp from '../Steps/StepOtp/StepOtp';
 
 const steps = {
     1: StepPhoneEmail,
     2: StepOtp,
 };
 
-const Login = () => {
+const Authenticate = () => {
     const [step, setStep] = useState(1);
     const Step = steps[step];
 
@@ -18,4 +18,4 @@ const Login = () => {
     return <Step onNext={onNext} />;
 };
 
-export default Login;
+export default Authenticate;
