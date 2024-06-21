@@ -11,12 +11,12 @@ const Room = () => {
     const { id: roomId } = useParams();
     const [room, setRoom] = useState(null);
 
-    // const { clients, provideRef, handleMute } = useWebRTC(roomId, user);
+    const { clients, provideRef, handleMute } = useWebRTC(roomId, user);
 
     // const history = useHistory();
     const navigate = useNavigate();
 
-    // const [isMuted, setMuted] = useState(true);
+    const [isMuted, setMuted] = useState(true);
 
     useEffect(() => {
         const fetchRoom = async () => {
@@ -27,26 +27,26 @@ const Room = () => {
         fetchRoom();
     }, [roomId]);
 
-    // useEffect(() => {
-    //     handleMute(isMuted, user.id);
-    // }, [isMuted]);
+    useEffect(() => {
+        handleMute(isMuted, user.id);
+    }, [isMuted]);
 
-    // const handManualLeave = () => {
-    //     navigate('/rooms');
-    // };
+    const handManualLeave = () => {
+        navigate('/rooms');
+    };
 
-    // const handleMuteClick = (clientId) => {
-    //     if (clientId !== user.id) {
-    //         return;
-    //     }
-    //     setMuted((prev) => !prev);
-    // };
+    const handleMuteClick = (clientId) => {
+        if (clientId !== user.id) {
+            return;
+        }
+        setMuted((prev) => !prev);
+    };
 
     return (
         <div>
             <div className="container">
                 <button 
-                    // onClick={handManualLeave}
+                    onClick={handManualLeave}
                     className={styles.goBack}>
                     <img src="/images/arrow-left.png" alt="arrow-left" />
                     <span>All voice rooms</span>
@@ -60,7 +60,7 @@ const Room = () => {
                             <img src="/images/palm.png" alt="palm-icon" />
                         </button>
                         <button
-                            // onClick={handManualLeave}
+                            onClick={handManualLeave}
                             className={styles.actionBtn}
                         >
                             <img src="/images/win.png" alt="win-icon" />
@@ -68,7 +68,7 @@ const Room = () => {
                         </button>
                     </div>
                 </div>
-                {/* <div className={styles.clientsList}>
+                <div className={styles.clientsList}>
                     {clients.map((client) => {
                         return (
                             <div className={styles.client} key={client.id}>
@@ -81,13 +81,13 @@ const Room = () => {
                                     <audio
                                         autoPlay
                                         ref={(instance) => {
-                                            // provideRef(instance, client.id);
+                                            provideRef(instance, client.id);
                                         }}
                                     />
                                     <button
-                                        // onClick={() =>
-                                        //     handleMuteClick(client.id)
-                                        // }
+                                        onClick={() =>
+                                            handleMuteClick(client.id)
+                                        }
                                         className={styles.micBtn}
                                     >
                                         {client.muted ? (
@@ -109,7 +109,7 @@ const Room = () => {
                             </div>
                         );
                     })}
-                </div> */}
+                </div>
             </div>
         </div>
     );
