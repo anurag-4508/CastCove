@@ -22,7 +22,7 @@ class OtpService {
                 body: `Your CastCove OTP is ${otp}. It is valid for 2 minutes only.`,
                
             });
-            console.log('otp sent to mobile')
+            // console.log('otp sent to mobile')
             return message;
         } catch (error) {
             console.error('Error sending OTP:', error);

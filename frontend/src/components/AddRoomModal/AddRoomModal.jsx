@@ -15,7 +15,7 @@ const AddRoomModal = ({ onClose }) => {
         try {
             if (!topic) return;
             const { data } = await create({ topic, roomType });
-            console.log(data);
+            // console.log(data);
             navigate(`/room/${data.id}`);
         } catch (err) {
             console.log(err.message);

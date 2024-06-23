@@ -34,7 +34,7 @@ const StepAvatar = ({ onNext }) => {
                     dispatch(setAuth(data));
                 }
             }
-            console.log(data);
+            // console.log(data);
         } catch (err) {
             console.log(err);
         }finally{

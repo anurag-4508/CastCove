@@ -5,11 +5,11 @@ const UserDto = require('../dtos/user-dto');
 
 class ActivateController {
     async activate(req, res) {
-        console.log("phase1");
+        // console.log("phase1");
 
         const { name, avatar } = req.body;
-        console.log("Received name:", name);
-        console.log("Received avatar:", avatar);
+        // console.log("Received name:", name);
+        // console.log("Received avatar:", avatar);
 
         if (!name || !avatar) {
             return res.status(400).json({ message: 'All fields are required!' });
@@ -22,7 +22,7 @@ class ActivateController {
             return res.status(400).json({ message: 'Invalid image format!' });
         }
 
-        console.log("phase2");
+        // console.log("phase2");
 
         const buffer = Buffer.from(
             avatar.replace(base64Prefix, ''),
@@ -33,23 +33,23 @@ class ActivateController {
 
         const imagePath = `${Date.now()}-${Math.round(Math.random() * 1e9)}.png`;
 
-        console.log("phase3");
+        // console.log("phase3");
 
         try {
-            console.log("phase4");
+            // console.log("phase4");
             const jimResp = await Jimp.read(buffer);
-            console.log("phase5");
+            // console.log("phase5");
             await jimResp
                 .resize(150, Jimp.AUTO)
                 .writeAsync(path.resolve(__dirname, `../storage/${imagePath}`));
-            console.log("phase6");
+            // console.log("phase6");
         } catch (err) {
-            console.log("phase7");
+            // console.log("phase7");
             console.error('Error processing image:', err);
             return res.status(500).json({ message: 'Could not process the image' });
         }
 
-        console.log("phase8");
+        // console.log("phase8");
 
         const userId = req.user._id;
 
@@ -64,7 +64,7 @@ class ActivateController {
             await user.save();
             return res.json({ user: new UserDto(user), auth: true });
         } catch (err) {
-            console.log("phase9");
+            // console.log("phase9");
             console.error('Error updating user:', err);
             return res.status(500).json({ message: 'Something went wrong!' });
         }

@@ -9,8 +9,8 @@ export function useLoadingWithRefresh() {
         (async () => {
             try {
                 const { data } = await axios.get(
-                    // `${process.env.REACT_APP_API_URL}/api/refresh`,
-                    `http://localhost:5500/api/refresh`,
+                    `${process.env.REACT_APP_API_URL}/api/refresh`,
+                    // `http://localhost:5500/api/refresh`,
                     {
                         withCredentials: true,
                     }

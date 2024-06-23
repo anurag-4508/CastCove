@@ -32,9 +32,9 @@ const Navigation = () => {
         try {
             const { data } = await logout();
             dispatch(setAuth(data));
-            console.log('I am logout');
+            // console.log('I am logout');
             navigate('/');
-            console.log('I used navigation');
+            // console.log('I used navigation');
         } catch (err) {
             console.log(err);
         }

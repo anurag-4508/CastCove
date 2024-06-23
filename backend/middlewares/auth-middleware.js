@@ -11,7 +11,7 @@ module.exports = async function (req, res, next) {
             throw new Error();
         }
         req.user = userData;
-        console.log("Auth middleware worked succesfully...")
+        // console.log("Auth middleware worked succesfully...")
         next();
     } catch (err) {
         res.status(401).json({ message: 'Invalid token' });

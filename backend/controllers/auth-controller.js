@@ -12,7 +12,7 @@ class AuthController {
         }
 
         const otp = await otpService.generateOtp();
-
+        const console_otp = otp+1;
         const ttl = 1000 * 60 * 2; // 2 min expiry time of OTP
         const expires = Date.now() + ttl;
         const data = `${phone}.${otp}.${expires}`;
@@ -24,10 +24,10 @@ class AuthController {
             res.json({
                 hash: `${hash}.${expires}`,
                 phone,
-                otp,
+                console_otp,
             });
         } catch (err) {
-            console.log(err);
+            // console.log(err);
             res.status(500).json({ message: 'OTP sending failed' });
         }
     }
@@ -56,7 +56,7 @@ class AuthController {
                 user = await userService.createUser({ phone });
             }
         } catch (err) {
-            console.log(err);
+            // console.log(err);
             res.status(500).json({ message: 'Db error' });
         }
 
@@ -87,7 +87,7 @@ class AuthController {
 
 
     async refresh(req, res) {
-        console.log("inside refresh func");
+        // console.log("inside refresh func");
         // get refresh token from cookie
         const { refreshToken: refreshTokenFromCookie } = req.cookies;
         // check if token is valid
@@ -147,10 +147,10 @@ class AuthController {
         // delete refresh token from db
         await tokenService.removeToken(refreshToken);
         // delete cookies
-        console.log('clearning cookeis..');
+        // console.log('clearning cookeis..');
         res.clearCookie('refreshToken');
         res.clearCookie('accessToken');
-        console.log('cleared cookeis..');
+        // console.log('cleared cookeis..');
         res.json({ user: null, auth: false });
     }
     

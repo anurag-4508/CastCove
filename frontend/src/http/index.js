@@ -1,7 +1,9 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: process.env.REACT_APP_API_URL || "http://localhost:5500",
+    baseURL: 
+        process.env.REACT_APP_API_URL ,
+        // "http://localhost:5500",
     withCredentials:true,
     headers: {
         'Content-type': 'application/json',
@@ -33,8 +35,8 @@ api.interceptors.response.use(
             originalRequest.isRetry = true;
             try {
                 await axios.get(
-                    // `${process.env.REACT_APP_API_URL}/api/refresh`,
-                    `http://localhost:5500/api/refresh`,
+                    `${process.env.REACT_APP_API_URL}/api/refresh`,
+                    // `http://localhost:5500/api/refresh`,
                     {
                         withCredentials: true,
                     }

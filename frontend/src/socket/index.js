@@ -8,8 +8,8 @@ const socketInit = () => {
         transports: ['websocket'],
     };
     return io(
-        // process.env.REACT_APP_SOCKET_SERVER_URL, 
-        'http://localhost:5500', 
+        process.env.REACT_APP_SOCKET_SERVER_URL, 
+        // 'http://localhost:5500', 
         options);
 };
 

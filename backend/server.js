@@ -38,7 +38,7 @@ app.get('/', (req, res) => {
 const socketUserMap = {};
 
 io.on('connection', (socket) => {
-    console.log('New connection', socket.id);
+    // console.log('New connection', socket.id);
     socket.on(ACTIONS.JOIN, ({ roomId, user }) => {
         socketUserMap[socket.id] = user;
         const clients = Array.from(io.sockets.adapter.rooms.get(roomId) || []);
@@ -95,7 +95,7 @@ io.on('connection', (socket) => {
         const clients = Array.from(io.sockets.adapter.rooms.get(roomId) || []);
         clients.forEach((clientId) => {
             if (clientId !== socket.id) {
-                console.log('mute info');
+                // console.log('mute info');
                 io.to(clientId).emit(ACTIONS.MUTE_INFO, {
                     userId,
                     isMute,
