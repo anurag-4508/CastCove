@@ -4,6 +4,8 @@ const userService = require('../services/user-service');
 const tokenService = require('../services/token-service');
 const UserDto = require('../dtos/user-dto');
 
+
+
 class AuthController {
     async sendOtp(req, res) {
         const { phone } = req.body;
@@ -31,6 +33,10 @@ class AuthController {
             res.status(500).json({ message: 'OTP sending failed' });
         }
     }
+
+
+    
+
 
     async verifyOtp(req, res) {
         const { otp, hash, phone } = req.body;

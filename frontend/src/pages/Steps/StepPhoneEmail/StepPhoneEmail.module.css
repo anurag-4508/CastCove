@@ -40,3 +40,7 @@
     margin: 0 auto;
     margin-top: 20px;
 }
+.error{
+    color: red;
+    padding-top: 15px;
+}

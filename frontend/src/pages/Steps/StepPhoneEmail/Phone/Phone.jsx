@@ -6,13 +6,18 @@ import styles from '../StepPhoneEmail.module.css';
 import { sendOtp } from '../../../../http/index';
 import { useDispatch } from 'react-redux';
 import { setOtp } from '../../../../store/authSlice';
+import { toast } from 'react-toastify';
 
 const Phone = ({ onNext }) => {
     const [phoneNumber, setPhoneNumber] = useState('');
+    const [error, setError] = useState('');
     const dispatch = useDispatch();
 
     async function submit() {
-        if(!phoneNumber)return;
+        if(!phoneNumber){
+            setError('Enter Phone number');
+            return;
+        }
         const { data } = await sendOtp({ phone: phoneNumber });
         console.log(data);
         dispatch(setOtp({ phone: data.phone, hash: data.hash }));
@@ -26,6 +31,7 @@ const Phone = ({ onNext }) => {
                 onChange={(e) => setPhoneNumber(e.target.value)}
             />
             <div>
+                <span className={styles.error}>{error}</span>
                 <div className={styles.actionButtonWrap}>
                     <Button text="Next" onClick={submit} />
                 </div>

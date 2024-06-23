@@ -10,11 +10,15 @@ import { useDispatch } from 'react-redux';
 
 const StepOtp = () => {
   const [otp, setOtp] = useState('');
+  const [error, setError] = useState('');
   const dispatch = useDispatch();
   const { phone, hash } = useSelector((state) => state.auth.otp);
 
   async function submit() {
-    if(!otp || !hash || !phone)return;
+    if(!otp || !hash || !phone){
+      setError('Enter OTP');
+      return;
+    }
     try {
       const { data } = await verifyOtp({ otp, phone, hash });
       console.log(data);
@@ -34,6 +38,7 @@ const StepOtp = () => {
             value={otp}
             onChange={(e) => setOtp(e.target.value)}
           />
+          <span className={styles.error}>{error}</span>
           <div className={styles.actionButtonWrap}>
             <Button onClick={submit} text="Next" />
           </div>

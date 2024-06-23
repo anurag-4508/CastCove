@@ -3,3 +3,8 @@
     text-align: center;
     margin: 20px auto;
 }
+
+.error {
+    color: red;
+    padding-top: 5px;
+}

@@ -14,7 +14,8 @@ const StepAvatar = ({ onNext }) => {
     const [image, setImage] = useState('/images/monkey-avatar.png');
     const [loading, setLoading] = useState(false);
     const [unMounted, setUnMounted] = useState(false);
-    
+    const [error, setError] = useState('');
+
     function captureImage(e) {
         const file = e.target.files[0];
         const reader = new FileReader();
@@ -25,7 +26,10 @@ const StepAvatar = ({ onNext }) => {
         };
     }
     async function submit() {
-        if (!name || !avatar) return;
+        if (!name || !avatar){
+            setError('Please select a Avatar');
+            return;
+        }
         setLoading(true);
         try {
             const { data } = await activate({ name, avatar });
@@ -34,7 +38,7 @@ const StepAvatar = ({ onNext }) => {
                     dispatch(setAuth(data));
                 }
             }
-            // console.log(data);
+            console.log(data);
         } catch (err) {
             console.log(err);
         }finally{
@@ -98,6 +102,7 @@ const StepAvatar = ({ onNext }) => {
                     <label className={styles.avatarLabel} htmlFor="avatarInputt">
                         Choose a different photo
                     </label>
+                    <span className={styles.error}>{error}</span>
                 </div>
                 <div>
                     <Button onClick={submit} text="Next" />

@@ -12,9 +12,11 @@ const StepName = ({ onNext }) => {
 
     const dispatch = useDispatch();
     const [fullname, setFullname] = useState(name);
+    const [error, setError] = useState('');
 
     function nextStep() {
         if (!fullname) {
+            setError('Please enter your Name!!')
             return;
         }
         dispatch(setName(fullname));
@@ -27,6 +29,7 @@ const StepName = ({ onNext }) => {
                     value={fullname}
                     onChange={(e) => setFullname(e.target.value)}
                 />
+                <span className={styles.error}>{error}</span>
                 <p className={styles.paragraph}>
                     People use real names at codershouse :) !
                 </p>
