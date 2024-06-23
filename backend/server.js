@@ -19,12 +19,12 @@ const io = require('socket.io')(server, {
 app.use(cookieParser());
 const corsOption = {
     credentials:true,
-    origin: ['http://localhost:3000'],
+    origin: [process.env.FRONT_URL],
 };
 app.use(cors(corsOption));
 app.use('/storage', express.static('storage'));
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 5500;
 DbConnect();
 app.use(express.json({limit:'8mb'}));
 app.use(router);
